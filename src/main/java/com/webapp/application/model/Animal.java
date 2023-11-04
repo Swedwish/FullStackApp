@@ -1,11 +1,13 @@
 package com.webapp.application.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.webapp.application.Deserializers.CustomAnimalDeserializer;
 import jakarta.persistence.*;
 
 import java.sql.Date;
 
 @Entity
-//@JsonDeserialize(using = AnimalDeserializer.class)
+//@JsonDeserialize(using = CustomAnimalDeserializer.class)
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,9 @@ public class Animal {
     private Date dateOfBirth;
     private String gender;
 
+    @ManyToOne
+    @JoinColumn(name = "cell_id")
+    private Cell cell;
     public Cell getCell() {
         return cell;
     }
@@ -23,10 +28,6 @@ public class Animal {
     public void setCell(Cell cell) {
         this.cell = cell;
     }
-    @ManyToOne
-    @JoinColumn(name = "cell_id")
-    private Cell cell;
-
     public int getId() {
         return id;
     }

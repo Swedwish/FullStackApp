@@ -8,13 +8,14 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 export default function Animal() {
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" };
 
-    // State variables to store form data
+    // State variables to store form data and error status
     const [name, setName] = React.useState("");
     const [species, setSpecies] = React.useState("");
     const [dateOfBirth, setDateOfBirth] = React.useState(null);
     const [gender, setGender] = React.useState("");
     const [cellNumber, setCellNumber] = React.useState("");
     const [speciesError, setSpeciesError] = React.useState(false);
+    const [cellNumberError, setCellNumberError] = React.useState(false);
 
     // Event handlers to update state
     const handleNameChange = (e) => {
@@ -34,30 +35,30 @@ export default function Animal() {
         setGender(e.target.value);
     };
 
-    // New handler for the Cell Number field
     const handleCellNumberChange = (e) => {
         setCellNumber(e.target.value);
+        setCellNumberError(false);
     };
 
     const handleSave = (e) => {
         e.preventDefault();
 
-        if (species.trim() === "") {
-            setSpeciesError(true);
+        if (species.trim() === "" || cellNumber.trim() === "") {
+            setSpeciesError(species.trim() === "");
+            setCellNumberError(cellNumber.trim() === "");
             return;
         }
-
         const animal = {
             name,
             species,
-            date_of_birth: dateOfBirth,
+            dateOfBirth,
             gender,
-            cell_id: cellNumber, // Add cell_id to the animal object
+            cell_id: cellNumber,
         };
 
         console.log(animal);
 
-        fetch("http://localhost:8080/animal/add", {
+        fetch("http://localhost:8080/animal/add/" + String(cellNumber), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(animal),
@@ -119,6 +120,9 @@ export default function Animal() {
                         sx={{ mt: 2 }}
                         value={cellNumber}
                         onChange={handleCellNumberChange}
+                        required
+                        error={cellNumberError}
+                        helperText={cellNumberError ? "Cell Number is required" : ""}
                     />
                     <Button
                         variant="contained"

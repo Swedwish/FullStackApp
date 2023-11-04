@@ -1,17 +1,22 @@
 import './App.css';
-import Appbar from './components/Appbar';
-import Animal from './components/Animal';
+import HomePage from './pages/HomePage';
+import AnimalAdditionPage from './pages/AnimalAdditionPage';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="App">
-        <Appbar />
-        <Animal />
-      </div>
-    </LocalizationProvider>
+    <Router>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/addAnimal" element={<AnimalAdditionPage />} />
+          </Routes>
+        </div>
+      </LocalizationProvider>
+    </Router>
   );
 }
 

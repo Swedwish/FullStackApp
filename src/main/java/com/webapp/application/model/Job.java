@@ -10,9 +10,11 @@ public class Job {
 
     @EmbeddedId
     private JobId jobId;
-
     @Column(name = "job_description")
     private String jobDescription;
+
+    public Job() {
+    }
 
     // Constructors, getters, and setters
 

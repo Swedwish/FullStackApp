@@ -11,11 +11,11 @@ import java.io.Serializable;
 public class JobId implements Serializable {
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "worker_id")
     private Worker worker;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "animal_id")
     private Animal animal;
 
     // Constructors, equals, and hashCode methods

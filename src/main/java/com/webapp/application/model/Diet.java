@@ -13,12 +13,12 @@ public class Diet {
 
     @ManyToOne
     @MapsId("animalId")
-    @JoinColumn(name = "animal_id")
+    @JoinColumn(name = "animalId")
     private Animal animal;
 
     @ManyToOne
     @MapsId("foodName")
-    @JoinColumn(name = "food_name")
+    @JoinColumn(name = "foodName")
     private Food food;
 
     private int amountKg;

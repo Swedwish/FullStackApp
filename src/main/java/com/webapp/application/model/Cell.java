@@ -9,9 +9,9 @@ public class Cell {
     @Id
     private int id;
     @Column(name = "size_m3")
-    private int sizeM3;
+    private Integer sizeM3;
     @Column(name = "average_temperature")
-    private int averageTemperature;
+    private Integer averageTemperature;
 
     public Cell() {
     }
@@ -24,19 +24,19 @@ public class Cell {
         this.id = id;
     }
 
-    public int getSizeM3() {
+    public Integer getSizeM3() {
         return sizeM3;
     }
 
-    public void setSizeM3(int sizeM3) {
+    public void setSizeM3(Integer sizeM3) {
         this.sizeM3 = sizeM3;
     }
 
-    public int getAverageTemperature() {
+    public Integer getAverageTemperature() {
         return averageTemperature;
     }
 
-    public void setAverageTemperature(int averageTemperature) {
+    public void setAverageTemperature(Integer averageTemperature) {
         this.averageTemperature = averageTemperature;
     }
 }
