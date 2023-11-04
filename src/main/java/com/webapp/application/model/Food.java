@@ -11,7 +11,7 @@ public class Food {
     private String name;
 
     @Column(name = "kcalories")
-    private int kcalories;
+    private Integer kcalories;
 
     @Column(name = "is_vegetarian")
     private boolean isVegetarian;
@@ -24,11 +24,11 @@ public class Food {
         this.name = name;
     }
 
-    public int getKcalories() {
+    public Integer getKcalories() {
         return kcalories;
     }
 
-    public void setKcalories(int kcalories) {
+    public void setKcalories(Integer kcalories) {
         this.kcalories = kcalories;
     }
 

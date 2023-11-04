@@ -8,20 +8,20 @@ import java.io.Serializable;
 @Embeddable
 public class DietId implements Serializable {
 
-    @Column(name = "id")
-    private int animalId;
+    @Column(name = "animal_id")
+    private Integer animalId;
 
-    @Column(name = "name")
+    @Column(name = "food_name")
     private String foodName;
 
     public DietId() {
     }
 
-    public int getAnimalId() {
+    public Integer getAnimalId() {
         return animalId;
     }
 
-    public void setAnimalId(int animalId) {
+    public void setAnimalId(Integer animalId) {
         this.animalId = animalId;
     }
 

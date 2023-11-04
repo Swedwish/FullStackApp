@@ -7,15 +7,15 @@ public class FoodRetailer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "food_name", referencedColumnName = "name")
+    @JoinColumn(name = "food_name")
     private Food food;
 
-    private int price;
+    private Integer price;
 
     // Empty constructor
     public FoodRetailer() {
@@ -23,11 +23,11 @@ public class FoodRetailer {
 
     // Getters and setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -47,11 +47,11 @@ public class FoodRetailer {
         this.food = food;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

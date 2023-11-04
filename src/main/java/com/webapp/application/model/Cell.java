@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Cell {
     @Id
-    private int id;
+    private Integer id;
     @Column(name = "size_m3")
     private Integer sizeM3;
     @Column(name = "average_temperature")
@@ -16,11 +16,11 @@ public class Cell {
     public Cell() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

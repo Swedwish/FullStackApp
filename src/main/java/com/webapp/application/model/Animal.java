@@ -1,7 +1,5 @@
 package com.webapp.application.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.webapp.application.Deserializers.CustomAnimalDeserializer;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -11,7 +9,7 @@ import java.sql.Date;
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String species;
     @Column(name = "date_of_birth")
@@ -28,11 +26,11 @@ public class Animal {
     public void setCell(Cell cell) {
         this.cell = cell;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

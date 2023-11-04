@@ -18,6 +18,9 @@ public class JobId implements Serializable {
     @JoinColumn(name = "animal_id")
     private Animal animal;
 
+    public JobId() {
+    }
+
     // Constructors, equals, and hashCode methods
 
     public Worker getWorker() {
