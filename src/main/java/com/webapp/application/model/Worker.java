@@ -2,30 +2,32 @@ package com.webapp.application.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.sql.Date; // Import java.sql.Date
 
 @Entity
-//@JsonDeserialize(using = AnimalDeserializer.class)
-public class Animal {
+public class Worker {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
-    private String species;
+
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private Date dateOfBirth; // Change datatype to java.sql.Date
+
+    private int salary;
+
+    @Column(name = "job_title")
+    private String jobTitle;
+
     private String gender;
 
-    public Cell getCell() {
-        return cell;
+    // Empty constructor
+    public Worker() {
     }
 
-    public void setCell(Cell cell) {
-        this.cell = cell;
-    }
-    @ManyToOne
-    @JoinColumn(name = "cell_id")
-    private Cell cell;
+    // Getters and setters
 
     public int getId() {
         return id;
@@ -43,14 +45,6 @@ public class Animal {
         this.name = name;
     }
 
-    public String getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
-    }
-
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -59,14 +53,27 @@ public class Animal {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
     public String getGender() {
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Animal(){
     }
 }

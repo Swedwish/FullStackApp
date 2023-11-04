@@ -7,17 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/animal")
 public class AnimalController {
     @Autowired
     private AnimalService animalService;
 
-//    @PostMapping("/add")
-//    public String add(@RequestBody Animal animal){
-//        animalService.saveAnimal(animal);
-//        return "New animal added";
-//    }
     @PostMapping("/add")
     public String add(@RequestBody Animal animal){
         animalService.saveAnimal(animal);
