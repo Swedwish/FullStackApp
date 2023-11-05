@@ -1,8 +1,6 @@
 package com.webapp.application.service;
 
 import com.webapp.application.model.Cell;
-import com.webapp.application.model.Cell;
-import com.webapp.application.repository.CellRepository;
 import com.webapp.application.repository.CellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ public class CellServiceImpl implements CellService{
     }
 
     @Override
-    public List<Cell> getAllCells() {
+    public List<Cell> findAllCells() {
         return cellRepository.findAll();
     }
 
@@ -34,6 +32,14 @@ public class CellServiceImpl implements CellService{
     @Override
     public Optional<Cell> getCellById(Integer id) {
         return cellRepository.findById(id);
+    }
+
+    @Override
+    public void deleteById(int id) throws Exception {
+        cellRepository.findById(id).map(cell -> {
+            cellRepository.delete(cell);
+            return cell;
+        }).orElseThrow(() -> new Exception("No cell with this id"));
     }
 
 }

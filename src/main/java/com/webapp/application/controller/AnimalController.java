@@ -1,8 +1,6 @@
 package com.webapp.application.controller;
 
 import com.webapp.application.model.Animal;
-import com.webapp.application.model.Cell;
-import com.webapp.application.repository.CellRepository;
 import com.webapp.application.service.AnimalService;
 import com.webapp.application.service.CellService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,39 +17,25 @@ public class AnimalController {
     private AnimalService animalService;
     @Autowired
     private CellService cellService;
-    //@Autowired
-    //private CellRepository cellRepository;
 
     @PostMapping("/add/{cellId}")
-    public String add(@PathVariable int cellId, @RequestBody Animal animal) throws Exception {
-        Cell cell = cellService.getCellById(cellId).map(celll -> {
-            animal.setCell(celll);
-            animalService.saveAnimal(animal);
-            return celll;
-        }).orElse(null);
-        if (cell == null){
-            cell = new Cell();
-            cell.setId(cellId);
-            cellService.saveCell(cell);
-            animal.setCell(cell);
-            animalService.saveAnimal(animal);
-        }
-        return "New animal added";
+    public Animal add(@PathVariable int cellId, @RequestBody Animal animal) throws Exception {
+        return animalService.saveAnimalWithOptionalCell(animal,cellId);
     }
 
     @GetMapping("/getByName")
-    public List<Animal> getAnimalByName(String name){
-        return animalService.getAnimalByName(name);
+    public List<Animal> getAnimalByName(@RequestBody String name){
+        return animalService.findAnimalByName(name);
     }
 
     @GetMapping("/getAll")
     public List<Animal> getAllAnimal() {
-        return animalService.getAllAnimals();
+        return animalService.findAllAnimals();
     }
 
     @DeleteMapping("/deleteById")
-    public void deleteAnimalById (@RequestBody int id){
-        animalService.deleteAnimalById(id);
+    public void deleteAnimalById (@RequestBody int animalId){
+        animalService.deleteAnimalById(animalId);
     }
 
     /*@PutMapping("/updateById")
@@ -60,7 +44,7 @@ public class AnimalController {
     }*/
 
     @PutMapping("/moveAnimal")
-    public void moveById(Map<String, Object> requestBody){
+    public void moveById(@RequestBody Map<String, Object> requestBody){
         int id = (int)requestBody.get("id");
         int cell = (int)requestBody.get("cell");
         animalService.moveById(id,cell);

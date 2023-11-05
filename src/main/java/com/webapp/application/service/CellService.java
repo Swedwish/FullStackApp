@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface CellService {
     public Cell saveCell(Cell cell);
-    public List<Cell> getAllCells();
+    public List<Cell> findAllCells();
     public void changeTemperatureById(int id,int temperature);
     public Optional<Cell> getCellById(Integer id);
-
+    void deleteById(int id) throws Exception;
 }

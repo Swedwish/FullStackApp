@@ -24,12 +24,12 @@ public class FoodServiceImpl implements FoodService{
     }
 
     @Override
-    public List<Food> getAllFood() {
+    public List<Food> findAllFood() {
         return foodRepository.findAll();
     }
 
     @Override
-    public Optional<Food> getFoodByName(String name) {
+    public Optional<Food> findFoodByName(String name) {
         return foodRepository.findByName(name);
     }
 

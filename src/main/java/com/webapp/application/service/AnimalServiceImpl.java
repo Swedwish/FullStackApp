@@ -1,13 +1,16 @@
 package com.webapp.application.service;
 
 import com.webapp.application.model.Animal;
+import com.webapp.application.model.Cell;
 import com.webapp.application.repository.AnimalRepository;
 import com.webapp.application.repository.CellRepository;
+import com.webapp.application.service.CellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class AnimalServiceImpl implements AnimalService{
@@ -22,7 +25,24 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
-    public List<Animal> getAllAnimals() {
+    public Animal saveAnimalWithOptionalCell(Animal animal, int cellId) {
+        Cell cell = cellRepository.findById(cellId).map(celll -> {
+            animal.setCell(celll);
+            saveAnimal(animal);
+            return celll;
+        }).orElse(null);
+        if (cell == null){
+            cell = new Cell();
+            cell.setId(cellId);
+            cellRepository.save(cell);
+            animal.setCell(cell);
+            saveAnimal(animal);
+        }
+        return animal;
+    }
+
+    @Override
+    public List<Animal> findAllAnimals() {
         return animalRepository.findAll();
     }
 
@@ -38,7 +58,7 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
-    public Optional<Animal> getAnimalById(Integer id) {
+    public Optional<Animal> findAnimalById(Integer id) {
         return animalRepository.findById(id);
     }
 
@@ -53,7 +73,7 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
-    public List<Animal> getAnimalByName(String name) {
+    public List<Animal> findAnimalByName(String name) {
         return animalRepository.findByName(name);
     }
 

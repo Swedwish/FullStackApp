@@ -19,17 +19,17 @@ public class WorkerServiceImpl implements WorkerService{
     }
 
     @Override
-    public List<Worker> getAllWorkers() {
+    public List<Worker> findAllWorkers() {
         return workerRepository.findAll();
     }
 
     @Override
-    public Optional<Worker> getWorkerByName(String name) {
+    public Optional<Worker> findWorkerByName(String name) {
         return workerRepository.findByName(name);
     }
 
     @Override
-    public Optional<Worker> getWorkerById(int id) {
+    public Optional<Worker> findWorkerById(int id) {
         return workerRepository.findById(id);
     }
 
