@@ -26,11 +26,9 @@ public class CellServiceImpl implements CellService{
     }
 
     @Override
-    public Cell changeCellById(Cell cell) {
-        Cell change = cellRepository.getReferenceById(cell.getId());
-        change.setSizeM3(cell.getSizeM3());
-        change.setAverageTemperature(cell.getAverageTemperature());
-        return change;
+    public void changeTemperatureById(int id, int temperature) {
+        Cell cell = cellRepository.getReferenceById(id);
+        cell.setAverageTemperature(temperature);
     }
 
     @Override
