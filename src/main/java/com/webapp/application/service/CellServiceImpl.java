@@ -25,8 +25,18 @@ public class CellServiceImpl implements CellService{
 
     @Override
     public void changeTemperatureById(int id, int temperature) {
-        Cell cell = cellRepository.getReferenceById(id);
-        cell.setAverageTemperature(temperature);
+        // Find the cell by ID
+        Cell cell = cellRepository.findById(id).orElse(null);
+
+        if (cell != null) {
+            // Update the average temperature
+            cell.setAverageTemperature(temperature);
+
+            // Save the updated cell back to the database
+            cellRepository.save(cell);
+        } else {
+            throw new RuntimeException("No cell with ID" + id);
+        }
     }
 
     @Override

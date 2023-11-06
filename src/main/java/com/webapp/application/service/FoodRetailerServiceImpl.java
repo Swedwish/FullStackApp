@@ -28,7 +28,18 @@ public class FoodRetailerServiceImpl implements FoodRetailerService{
     }
     @Override
     public void changePriceById(int id, int newPrice) {
-        foodRetailerRepository.getReferenceById(id).setPrice(newPrice);
+        // Find the food retailer by ID
+        FoodRetailer foodRetailer = foodRetailerRepository.findById(id).orElse(null);
+
+        if (foodRetailer != null) {
+            // Update the price
+            foodRetailer.setPrice(newPrice);
+
+            // Save the updated food retailer back to the database
+            foodRetailerRepository.save(foodRetailer);
+        } else {
+            throw new RuntimeException("No food retailer with such ID");
+        }
     }
 
     @Override

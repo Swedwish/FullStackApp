@@ -24,7 +24,7 @@ public class WorkerServiceImpl implements WorkerService{
     }
 
     @Override
-    public Optional<Worker> findWorkerByName(String name) {
+    public List<Worker> findWorkerByName(String name) {
         return workerRepository.findByName(name);
     }
 
@@ -34,16 +34,33 @@ public class WorkerServiceImpl implements WorkerService{
     }
 
     @Override
-    public void changeSalary(int id, int newSalary){
-        workerRepository.findById(id).map(worker -> {
+    public void changeSalary(int id, int newSalary) {
+        Worker worker = workerRepository.findById(id).orElse(null);
+
+        if (worker != null) {
+            // Update the salary
             worker.setSalary(newSalary);
-            return worker;
-        }).orElseThrow(() -> new RuntimeException("No worker with id ="+ id));
+
+            // Save the updated worker back to the database
+            workerRepository.save(worker);
+        } else {
+            throw new RuntimeException("No worker with id = " + id);
+        }
     }
 
     @Override
     public void promote(int id, String newJobTitle) {
+        Worker worker = workerRepository.findById(id).orElse(null);
 
+        if (worker != null) {
+            // Update the job title
+            worker.setJobTitle(newJobTitle);
+
+            // Save the updated worker back to the database
+            workerRepository.save(worker);
+        } else {
+            throw new RuntimeException("No worker with id = " + id);
+        }
     }
 
     @Override

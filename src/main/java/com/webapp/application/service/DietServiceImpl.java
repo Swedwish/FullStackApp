@@ -21,7 +21,6 @@ public class DietServiceImpl implements DietService{
 
     @Override
     public Diet saveDiet(Diet diet) {
-        //animalRepository.findById(diet.getAnimal());
         return dietRepository.save(diet);
     }
 

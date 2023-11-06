@@ -63,8 +63,25 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
-    public void moveById(int id, int cell) {
-        animalRepository.getReferenceById(id).setCell(cellRepository.getReferenceById(cell));
+    public void moveById(int animalId, int cellId) {
+        Animal animal = animalRepository.findById(animalId).orElse(null);
+
+        if (animal != null) {
+            // Find the cell by ID
+            Cell cellEntity = cellRepository.findById(cellId).orElse(null);
+
+            if (cellEntity != null) {
+                // Update the cell for the animal
+                animal.setCell(cellEntity);
+
+                // Save the updated animal back to the database
+                animalRepository.save(animal);
+            } else {
+                throw new RuntimeException("No cell with ID "+cellId);
+            }
+        } else {
+            throw new RuntimeException("No animal with ID" + animalId);
+        }
     }
 
     @Override

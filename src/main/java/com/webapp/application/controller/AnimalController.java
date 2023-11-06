@@ -24,8 +24,8 @@ public class AnimalController {
     }
 
     @GetMapping("/getByName")
-    public List<Animal> getAnimalByName(@RequestBody String name){
-        return animalService.findAnimalByName(name);
+    public List<Animal> getAnimalByName(@RequestBody String animalName){
+        return animalService.findAnimalByName(animalName);
     }
 
     @GetMapping("/getAll")
@@ -38,15 +38,10 @@ public class AnimalController {
         animalService.deleteAnimalById(animalId);
     }
 
-    /*@PutMapping("/updateById")
-    public Animal updateAnimal(Animal animal){
-        return animalService.changeAnimal(animal);
-    }*/
-
     @PutMapping("/moveAnimal")
     public void moveById(@RequestBody Map<String, Object> requestBody){
-        int id = (int)requestBody.get("id");
-        int cell = (int)requestBody.get("cell");
+        int id = Integer.parseInt((String) requestBody.get("animalId"));
+        int cell = Integer.parseInt((String) requestBody.get("cellId"));
         animalService.moveById(id,cell);
     }
 }

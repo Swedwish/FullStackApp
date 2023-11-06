@@ -27,7 +27,7 @@ public class WorkerController {
     }
 
     @GetMapping("/findByName")
-    public Optional<Worker> findWorkerByName(@RequestBody String workerName){
+    public List<Worker> findWorkerByName(@RequestBody String workerName){
         return workerService.findWorkerByName(workerName);
     }
 
