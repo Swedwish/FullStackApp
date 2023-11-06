@@ -25,8 +25,8 @@ public class FoodController {
         return foodService.findAllFood();
     }
 
-    @GetMapping("/fundByName")
-    public Optional<Food> findByName(@RequestBody String foodName){
+    @GetMapping("/findByName/{foodName}")
+    public Optional<Food> findByName(@PathVariable String foodName){
         return foodService.findFoodByName(foodName);
     }
 

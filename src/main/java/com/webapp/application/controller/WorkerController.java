@@ -26,8 +26,8 @@ public class WorkerController {
         return workerService.findAllWorkers();
     }
 
-    @GetMapping("/findByName")
-    public List<Worker> findWorkerByName(@RequestBody String workerName){
+    @GetMapping("/findByName/{workerName}")
+    public List<Worker> findWorkerByName(@PathVariable String workerName){
         return workerService.findWorkerByName(workerName);
     }
 

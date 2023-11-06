@@ -23,8 +23,8 @@ public class AnimalController {
         return animalService.saveAnimalWithOptionalCell(animal,cellId);
     }
 
-    @GetMapping("/getByName")
-    public List<Animal> getAnimalByName(@RequestBody String animalName){
+    @GetMapping("/getByName/{animalName}")
+    public List<Animal> getAnimalByName(@PathVariable String animalName){
         return animalService.findAnimalByName(animalName);
     }
 
