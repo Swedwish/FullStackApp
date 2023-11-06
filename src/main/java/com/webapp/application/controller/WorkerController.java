@@ -38,17 +38,17 @@ public class WorkerController {
 
     @PutMapping("/changeSalary")
     public void changeSalary(@RequestBody Map<String, Object> data){
-        workerService.changeSalary((Integer)data.get("workerId"), (Integer)data.get("salary"));
+        workerService.changeSalary(Integer.parseInt((String)data.get("workerId")), Integer.parseInt((String)data.get("salary")));
     }
 
     @PutMapping("/promote")
     public void promote(@RequestBody Map<String, Object> data){
-        workerService.promote((Integer) data.get("workerId"), (String) data.get("jobTitle"));
+        workerService.promote(Integer.parseInt((String)data.get("workerId")), (String) data.get("jobTitle"));
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody Integer workerId){
-        workerService.fire(workerId);
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Integer id){
+        workerService.fire(id);
     }
 
 }

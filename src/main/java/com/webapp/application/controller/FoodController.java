@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,8 +31,8 @@ public class FoodController {
         return foodService.findFoodByName(foodName);
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody String foodName) {
-        foodService.deleteFoodByName(foodName);
+    @DeleteMapping("/delete/{name}")
+    public void delete(@PathVariable String name) {
+        foodService.deleteFoodByName(name);
     }
 }

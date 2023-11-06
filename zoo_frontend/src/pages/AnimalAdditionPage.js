@@ -1,8 +1,18 @@
 import Appbar from '../components/Appbar';
-function AnimalAdditionPage() {
-    return (
-        <div>
+import AddAnimal from '../components/AddAnimal';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import React from 'react';
+//import { Link } from 'react-router-dom';
+function animalAddition() {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className="HomePage">
         <Appbar />
-        </div>
-        )}
-export default AnimalAdditionPage;
+        <AddAnimal />
+      </div>
+    </LocalizationProvider>
+  );
+}
+
+export default animalAddition;

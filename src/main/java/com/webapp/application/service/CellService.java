@@ -10,5 +10,5 @@ public interface CellService {
     public List<Cell> findAllCells();
     public void changeTemperatureById(int id,int temperature);
     public Optional<Cell> getCellById(Integer id);
-    void deleteById(int id) throws Exception;
+    void deleteById(int id);
 }

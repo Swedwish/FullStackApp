@@ -45,11 +45,11 @@ public class CellServiceImpl implements CellService{
     }
 
     @Override
-    public void deleteById(int id) throws Exception {
+    public void deleteById(int id){
         cellRepository.findById(id).map(cell -> {
             cellRepository.delete(cell);
             return cell;
-        }).orElseThrow(() -> new Exception("No cell with this id"));
+        }).orElseThrow(() -> new RuntimeException("No cell with id" + id));
     }
 
 }

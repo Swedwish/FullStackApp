@@ -27,10 +27,10 @@ public class JobController {
     public Job saveJob(@RequestBody Map<String , Object> data) throws Exception {
         Job job = new Job();
         job.setJobDescription((String) data.get("jobDescription"));
-        Integer animalId = (Integer) data.get("animalId");
+        Integer animalId = Integer.parseInt((String) data.get("animalId"));
         job.setAnimal(animalService.findAnimalById(animalId)
                 .orElseThrow(()-> new Exception("No animal with ID"+animalId+" found")));
-        Integer workerId = (Integer) data.get("workerId");
+        Integer workerId = Integer.parseInt((String) data.get("workerId"));
         job.setWorker(workerService.findWorkerById(workerId)
                 .orElseThrow(()-> new Exception("No worker with id"+workerId+"found.")));
         return jobService.saveJob(job);
@@ -56,8 +56,8 @@ public class JobController {
         return jobService.findByWorkerId(workerId);
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody int jobId){
-        jobService.deleteJobById(jobId);
+    @DeleteMapping("/delete/id")
+    public void delete(@RequestBody Integer id){
+        jobService.deleteJobById(id);
     }
 }

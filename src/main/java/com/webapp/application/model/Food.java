@@ -32,11 +32,11 @@ public class Food {
         this.kcalories = kcalories;
     }
 
-    public boolean isVegetarian() {
+    public boolean getIsVegetarian() {
         return isVegetarian;
     }
 
-    public void setVegetarian(boolean vegetarian) {
+    public void setIsVegetarian(boolean vegetarian) {
         isVegetarian = vegetarian;
     }
 }

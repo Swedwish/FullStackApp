@@ -19,7 +19,7 @@ public class AnimalController {
     private CellService cellService;
 
     @PostMapping("/add/{cellId}")
-    public Animal add(@PathVariable int cellId, @RequestBody Animal animal) throws Exception {
+    public Animal addAnimal(@PathVariable int cellId, @RequestBody Animal animal) throws Exception {
         return animalService.saveAnimalWithOptionalCell(animal,cellId);
     }
 
@@ -33,9 +33,9 @@ public class AnimalController {
         return animalService.findAllAnimals();
     }
 
-    @DeleteMapping("/deleteById")
-    public void deleteAnimalById (@RequestBody int animalId){
-        animalService.deleteAnimalById(animalId);
+    @DeleteMapping("/delete/{id}")
+    public void deleteAnimalById (@PathVariable int id){
+        animalService.deleteAnimalById(id);
     }
 
     @PutMapping("/moveAnimal")

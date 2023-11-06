@@ -20,14 +20,9 @@ public class FoodRetailerController {
     @Autowired
     FoodRetailerService foodRetailerService;
 
-    @PostMapping("/add")
-    public FoodRetailer save(@RequestBody Map<String, Object> data) throws Exception {
-        String foodName = (String) data.get("foodName");
-        FoodRetailer foodRetailer = new FoodRetailer();
-        foodRetailer.setFood(foodService.findFoodByName(foodName)
-                .orElseThrow(()-> new Exception("No food with name " + foodName)));
-        foodRetailer.setName((String) data.get("name"));
-        foodRetailer.setPrice((Integer) data.get("price"));
+    @PostMapping("/add/{foodName}")
+    public FoodRetailer save(@PathVariable String foodName, @RequestBody FoodRetailer foodRetailer) {
+        foodRetailer.setFood(foodService.findFoodByName(foodName).orElseThrow(()->new RuntimeException("No food with name" + foodName)));
         return foodRetailerService.saveFoodRetailer(foodRetailer);
     }
 
@@ -38,15 +33,15 @@ public class FoodRetailerController {
 
     @PutMapping("/changePriceById")
     public void changePriceById(@RequestBody Map<String, Object> data){
-        foodRetailerService.changePriceById((Integer)data.get("foodRetailerId"),(Integer)data.get("price"));
+        foodRetailerService.changePriceById(Integer.parseInt((String)data.get("foodRetailerId")),Integer.parseInt((String)data.get("price")));
     }
 
     @GetMapping("/findFoodRetailerById")
-    public Optional<FoodRetailer> findFoodRetailerById(@RequestBody int foodRetailerId){
+    public Optional<FoodRetailer> findFoodRetailerById(@RequestBody Integer foodRetailerId){
         return foodRetailerService.findFoodRetailerById(foodRetailerId);
     }
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody int foodRetailerId){
-        foodRetailerService.delete(foodRetailerId);
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Integer id){
+        foodRetailerService.delete(id);
     }
 }

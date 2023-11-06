@@ -26,8 +26,8 @@ public class DietController {
     @PostMapping("/add")
     public Diet saveDiet(@RequestBody Map<String, Object> data) throws Exception {
         Diet diet = new Diet();
-        diet.setAmountKg((Integer) data.get("amountKg"));
-        diet.setAnimal(animalService.findAnimalById((int)data.get("animalId"))
+        diet.setAmountKg(Integer.parseInt((String) data.get("amountKg")));
+        diet.setAnimal(animalService.findAnimalById(Integer.parseInt((String)data.get("animalId")))
                 .orElseThrow(()-> new Exception("No animal with such id")));
         diet.setFood(foodService.findFoodByName((String) data.get("foodName"))
                 .orElseThrow(()-> new Exception("No food with such name")));
@@ -39,13 +39,13 @@ public class DietController {
     }
 
     @GetMapping("/findById")
-    public Optional<Diet> findById(@RequestBody int dietId){
+    public Optional<Diet> findById(@RequestBody Integer dietId){
         return dietService.findDietById(dietId);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteDietById(@RequestBody int dietId){
-        dietService.deleteDietById(dietId);
+    @DeleteMapping("/delete/{id}")
+    public void deleteDietById(@PathVariable Integer id){
+        dietService.deleteDietById(id);
     }
 
 }

@@ -22,7 +22,7 @@ public class CellController
     }
 
     @PostMapping("/add")
-    public Cell add(@RequestBody Cell cell){
+    public Cell addCell(@RequestBody Cell cell){
         return cellService.saveCell(cell);
     }
 
@@ -33,8 +33,8 @@ public class CellController
         cellService.changeTemperatureById(id, temperature);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteById(@RequestBody int cellId) throws Exception {
-        cellService.deleteById(cellId);
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable int id) {
+        cellService.deleteById(id);
     }
 }
