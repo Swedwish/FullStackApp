@@ -23,12 +23,12 @@ public class AnimalController {
         return animalService.saveAnimalWithOptionalCell(animal,cellId);
     }
 
-    @GetMapping("/getByName/{animalName}")
+    @GetMapping("/findByName/{animalName}")
     public List<Animal> getAnimalByName(@PathVariable String animalName){
         return animalService.findAnimalByName(animalName);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/findAll")
     public List<Animal> getAllAnimal() {
         return animalService.findAllAnimals();
     }

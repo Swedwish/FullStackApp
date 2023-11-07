@@ -16,7 +16,7 @@ public class CellController
     @Autowired
     CellService cellService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/findAll")
     public List<Cell> findAllCells(){
         return cellService.findAllCells();
     }

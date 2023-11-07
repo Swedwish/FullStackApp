@@ -8,6 +8,7 @@ import FoodRetailerAdditionPage from './pages/FoodRetailerAdditionPage';
 import JobAdditionPage from './pages/JobAdditionPage';
 import WorkerAdditionPage from './pages/WorkerAdditionPage';
 import RemovalPage from './pages/RemovalPage'
+import GetAllPage from './pages/GetAllPage'
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -28,6 +29,7 @@ function App() {
             <Route path='/addJob' element={<JobAdditionPage/>}/>
             <Route path='/addWorker' element={<WorkerAdditionPage/>}/>
             <Route path="/delete/:className" element={<RemovalPage/>} />
+            <Route path="/getAll/:className" element={<GetAllPage/>} />
           </Routes>
         </div>
       </LocalizationProvider>
