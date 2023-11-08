@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Container, Paper } from '@mui/material';
+import { Container, Paper, Typography } from '@mui/material';
 
 export default function AddCell() {
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" };
@@ -68,6 +68,9 @@ export default function AddCell() {
                     noValidate
                     autoComplete="off"
                 >
+                    <Typography variant="h5" gutterBottom>
+                        Cell Addition
+                    </Typography>
                     <TextField
                         id="outlined-basic"
                         label="ID"

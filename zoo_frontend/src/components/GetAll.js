@@ -18,6 +18,27 @@ export default function GetAllRows(props) {
             });
     };
 
+    const classNameHandler = (name) => {
+        switch (name){
+            case "animal":
+                return("Animal");
+            case "cell":
+                return("Cell");
+            case "diet":
+                return("Diet");
+            case "food":
+                return("Food");
+            case "foodRetailer":
+                return("Food Retailer");
+            case "job":
+                return("Job");
+            case "worker":
+                return("Worker");
+            default:
+                return("Unknown");
+        }
+    }
+
     const renderDataByClass = (item) => {
         switch (className) {
             case "animal":
@@ -108,7 +129,7 @@ export default function GetAllRows(props) {
                     noValidate
                     autoComplete="off"
                 >
-                    <h2>{className} Data</h2>
+                    <h2>{classNameHandler(className)} Data</h2>
                     <Button
                         variant="contained"
                         color="primary"

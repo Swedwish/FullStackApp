@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Container, Paper } from '@mui/material';
+import { Container, Paper, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function AddWorker() {
@@ -76,6 +76,9 @@ export default function AddWorker() {
                     noValidate
                     autoComplete="off"
                 >
+                    <Typography variant="h5" gutterBottom>
+                        Worker Addition
+                    </Typography>
                     <TextField
                         id="outlined-basic"
                         label="Name"

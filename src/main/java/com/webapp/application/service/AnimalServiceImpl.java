@@ -4,7 +4,6 @@ import com.webapp.application.model.Animal;
 import com.webapp.application.model.Cell;
 import com.webapp.application.repository.AnimalRepository;
 import com.webapp.application.repository.CellRepository;
-import com.webapp.application.service.CellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +62,7 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
-    public void moveById(int animalId, int cellId) {
+    public Animal moveById(int animalId, int cellId) {
         Animal animal = animalRepository.findById(animalId).orElse(null);
 
         if (animal != null) {
@@ -82,6 +81,7 @@ public class AnimalServiceImpl implements AnimalService{
         } else {
             throw new RuntimeException("No animal with ID" + animalId);
         }
+        return animal;
     }
 
     @Override
@@ -91,7 +91,8 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Override
     public List<Animal> findAnimalByName(String name) {
-        return animalRepository.findByName(name);
+        List<Animal> ans = animalRepository.findByName(name);
+        return ans;
     }
 
 

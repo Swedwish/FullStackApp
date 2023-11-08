@@ -39,9 +39,9 @@ public class AnimalController {
     }
 
     @PutMapping("/moveAnimal")
-    public void moveById(@RequestBody Map<String, Object> requestBody){
-        int id = Integer.parseInt((String) requestBody.get("animalId"));
-        int cell = Integer.parseInt((String) requestBody.get("cellId"));
-        animalService.moveById(id,cell);
+    public Animal moveById(@RequestBody Map<String, Object> data){
+        Integer id = Integer.parseInt((String) data.get("id"));
+        Integer cell = Integer.parseInt((String) data.get("cellId"));
+        return animalService.moveById(id,cell);
     }
 }

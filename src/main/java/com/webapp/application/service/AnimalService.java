@@ -12,6 +12,6 @@ public interface AnimalService {
     public Optional<Animal> findAnimalById(Integer id);
     public List<Animal> findAnimalByName(String name);
     public void deleteAnimalById(int id);
-    public void moveById(int id, int cell);
+    public Animal moveById(int id, int cell);
     public Animal saveAnimalWithOptionalCell(Animal animal, int cellId);
 }

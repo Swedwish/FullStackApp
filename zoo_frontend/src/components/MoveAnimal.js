@@ -2,8 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Container, Paper, Typography } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Container, Paper } from '@mui/material';
 
 function formatDate(date) {
     if (!date) {
@@ -14,35 +13,21 @@ function formatDate(date) {
     return formattedDate;
 }
 
-export default function AddAnimal() {
+export default function MoveAnimal() {
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" };
 
     // State variables to store form data and error status
-    const [name, setName] = React.useState("");
-    const [species, setSpecies] = React.useState("");
-    const [dateOfBirth, setDateOfBirth] = React.useState(null);
-    const [gender, setGender] = React.useState("");
+    const [id, setId] = React.useState("");
     const [cellNumber, setCellNumber] = React.useState("");
-    const [speciesError, setSpeciesError] = React.useState(false);
+    const [idError, setIdError] = React.useState(false);
     const [cellNumberError, setCellNumberError] = React.useState(false);
     const [resultAnimal, setResultAnimal] = React.useState(null);
 
     // Event handlers to update state
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    };
 
-    const handleSpeciesChange = (e) => {
-        setSpecies(e.target.value);
-        setSpeciesError(false);
-    };
-
-    const handleDateOfBirthChange = (date) => {
-        setDateOfBirth(date);
-    };
-
-    const handleGenderChange = (e) => {
-        setGender(e.target.value);
+    const handleIdChange = (e) => {
+        setId(e.target.value);
+        setIdError(false);
     };
 
     const handleCellNumberChange = (e) => {
@@ -50,33 +35,33 @@ export default function AddAnimal() {
         setCellNumberError(false);
     };
 
-    const handleSave = (e) => {
+    const handleMove = (e) => {
         e.preventDefault();
 
-        if (species.trim() === "" || cellNumber.trim() === "") {
-            setSpeciesError(species.trim() === "");
+        if (id.trim() === "" || cellNumber.trim() === "") {
+            setIdError(id.trim() === "");
             setCellNumberError(cellNumber.trim() === "");
             return;
         }
         const animal = {
-            name,
-            species,
-            dateOfBirth,
-            gender,
-            cell_id: cellNumber,
+            id,
+            cellId: cellNumber
         };
 
         console.log(animal);
 
-        fetch(`http://localhost:8080/animal/add/${cellNumber}`, {
-            method: "POST",
+        fetch(`http://localhost:8080/animal/moveAnimal`, {
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(animal),
         })
-        .then((res) => res.json())
-        .then((result) => {
-            setResultAnimal(result);
-        });
+            .then((res) => {
+                res.json();
+                console.log(res);
+            })
+            .then((result) => {
+                setResultAnimal(result);
+            });
     };
 
     return (
@@ -87,49 +72,20 @@ export default function AddAnimal() {
                     noValidate
                     autoComplete="off"
                 >
-                    <Typography variant="h5" gutterBottom>
-                        Animal Addition
-                    </Typography>
                     <TextField
                         id="outlined-basic"
-                        label="Name"
+                        label="ID"
                         variant="outlined"
                         fullWidth
-                        value={name}
-                        onChange={handleNameChange}
-                    />
-                    <TextField
-                        id="outlined-basic"
-                        label="Species"
-                        variant="outlined"
-                        fullWidth
-                        sx={{ mt: 2 }}
-                        value={species}
-                        onChange={handleSpeciesChange}
+                        value={id}
+                        onChange={handleIdChange}
                         required
-                        error={speciesError}
-                        helperText={speciesError ? "Species is required" : ""}
-                    />
-                    <DatePicker
-                        label="Date of Birth"
-                        value={dateOfBirth}
-                        format="DD.MM.YYYY"
-                        onChange={handleDateOfBirthChange}
-                        fullWidth
-                        sx={{ mt: 2, width: '100%' }}
+                        error={idError}
+                        helperText={idError ? "ID is required" : ""}
                     />
                     <TextField
                         id="outlined-basic"
-                        label="Gender (F/M)"
-                        variant="outlined"
-                        fullWidth
-                        sx={{ mt: 2 }}
-                        value={gender}
-                        onChange={handleGenderChange}
-                    />
-                    <TextField
-                        id="outlined-basic"
-                        label="Cell Number"
+                        label="New cell mumber(id)"
                         variant="outlined"
                         fullWidth
                         sx={{ mt: 2 }}
@@ -142,10 +98,10 @@ export default function AddAnimal() {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleSave}
+                        onClick={handleMove}
                         sx={{ mt: 2 }}
                     >
-                        Save
+                        Move
                     </Button>
                 </Box>
             </Paper>

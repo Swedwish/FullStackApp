@@ -23,7 +23,7 @@ const subMenus = {
   Animal: [
     { text: 'Add Animal', link: '/addAnimal' },
     { text: 'Delete Animal', link: '/delete/animal' },
-    { text: 'Move Animal', link: '/moveAnimal' },
+    { text: 'Move Animal', link: '/move/animal' },
     { text: 'Get All Animals', link: '/getAll/animal' },
     { text: 'Get Animal by Name', link: '/getAnimalByName' },
   ],

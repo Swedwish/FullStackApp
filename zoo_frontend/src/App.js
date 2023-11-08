@@ -13,6 +13,8 @@ import GetAllPage from './pages/GetAllPage'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MoveAnimalPage from './pages/MoveAnimalPage';
+import GetAnimalByNamePage from './pages/GetAnimalByNamePage';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path='/addWorker' element={<WorkerAdditionPage/>}/>
             <Route path="/delete/:className" element={<RemovalPage/>} />
             <Route path="/getAll/:className" element={<GetAllPage/>} />
+            <Route path="/move/animal" element={<MoveAnimalPage/>} />
+            <Route path='/getAnimalByName' element={<GetAnimalByNamePage/>}/>
           </Routes>
         </div>
       </LocalizationProvider>

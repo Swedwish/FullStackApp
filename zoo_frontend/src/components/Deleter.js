@@ -19,6 +19,27 @@ export default function DeleteItem(props) {
         console.log(className);
     };
 
+    const classNameHandler = (name) => {
+        switch (name){
+            case "animal":
+                return("Animal");
+            case "cell":
+                return("Cell");
+            case "diet":
+                return("Diet");
+            case "food":
+                return("Food");
+            case "foodRetailer":
+                return("Food Retailer");
+            case "job":
+                return("Job");
+            case "worker":
+                return("Worker");
+            default:
+                return("Unknown");
+        }
+    }
+
     const handleDelete = (e) => {
         e.preventDefault();
 
@@ -48,7 +69,7 @@ export default function DeleteItem(props) {
                     autoComplete="off"
                 >
                     <Typography variant="h5" gutterBottom>
-                        {className} deletion
+                        {classNameHandler(className)} deletion
                     </Typography>
                     <TextField
                         id="outlined-basic"
