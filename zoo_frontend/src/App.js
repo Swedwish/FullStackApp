@@ -9,12 +9,19 @@ import JobAdditionPage from './pages/JobAdditionPage';
 import WorkerAdditionPage from './pages/WorkerAdditionPage';
 import RemovalPage from './pages/RemovalPage'
 import GetAllPage from './pages/GetAllPage'
+import GetDietPage from './pages/GetDietPage'
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MoveAnimalPage from './pages/MoveAnimalPage';
 import GetAnimalByNamePage from './pages/GetAnimalByNamePage';
+import ChangeCellTemperaturePage from './pages/ChangeCellTemperaturePage';
+import GetFoodByNamePage from './pages/GetFoodByNamePage';
+import GetFoodRetailerByIdPage from './pages/GetFoodRetailerByIdPage';
+import ChangePricePage from './pages/ChangePricePage';
+import GetJobByIdPage from './pages/GetJobById';
+import GetJobByAnimalOrWorkerIdPage from './pages/GetJobByAnimalOrWorkerIdPage';
 
 function App() {
   return (
@@ -34,6 +41,13 @@ function App() {
             <Route path="/getAll/:className" element={<GetAllPage/>} />
             <Route path="/move/animal" element={<MoveAnimalPage/>} />
             <Route path='/getAnimalByName' element={<GetAnimalByNamePage/>}/>
+            <Route path='/changeTemperatureInCell' element={<ChangeCellTemperaturePage/>}/>
+            <Route path='/getDiet' element={<GetDietPage/>}/>
+            <Route path='/getFoodByName' element={<GetFoodByNamePage/>}/>
+            <Route path='/getFoodRetailerById' element={<GetFoodRetailerByIdPage/>}/>
+            <Route path='/changePrice' element={<ChangePricePage/>}/>
+            <Route path='/getJobById' element={<GetJobByIdPage/>}/>
+            <Route path='/getJobByAnimalOrWorkerId' element={<GetJobByAnimalOrWorkerIdPage/>}/>
           </Routes>
         </div>
       </LocalizationProvider>

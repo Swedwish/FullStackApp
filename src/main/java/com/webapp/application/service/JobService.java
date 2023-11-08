@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface JobService {
-    public Job saveJob(Job job);
-    public List<Job> findAllJobs();
-    public Optional<Job> findJobById(int id);
-    public List<Job> findByAnimalId(int id);
-    public List<Job> findByWorkerId(int id);
-    public void deleteJobById(int id);
+    Job saveJob(Job job);
+    List<Job> findByAnimalAndWorkerId(int animalId, int workerId);
+    List<Job> findAllJobs();
+    Optional<Job> findJobById(int id);
+    List<Job> findByAnimalId(int id);
+    List<Job> findByWorkerId(int id);
+    void deleteJobById(int id);
 }

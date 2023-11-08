@@ -23,22 +23,22 @@ public class FoodRetailerController {
     @PostMapping("/add/{foodName}")
     public FoodRetailer save(@PathVariable String foodName, @RequestBody FoodRetailer foodRetailer) {
         foodRetailer.setFood(foodService.findFoodByName(foodName).orElseThrow(()->new RuntimeException("No food with name" + foodName)));
-        return foodRetailerService.saveFoodRetailer(foodRetailer);
+        return foodRetailerService.save(foodRetailer);
     }
 
     @GetMapping("/getAll")
     public List<FoodRetailer> findAll(){
-        return foodRetailerService.findAllFoodRetailers();
+        return foodRetailerService.findAll();
     }
 
-    @PutMapping("/changePriceById")
-    public void changePriceById(@RequestBody Map<String, Object> data){
-        foodRetailerService.changePriceById(Integer.parseInt((String)data.get("foodRetailerId")),Integer.parseInt((String)data.get("price")));
+    @PutMapping("/changePrice")
+    public FoodRetailer changePriceById(@RequestBody Map<String, Object> data){
+        return foodRetailerService.changePriceById(Integer.parseInt((String)data.get("id")),Integer.parseInt((String)data.get("price")));
     }
 
-    @GetMapping("/findFoodRetailerById")
-    public Optional<FoodRetailer> findFoodRetailerById(@RequestBody Integer foodRetailerId){
-        return foodRetailerService.findFoodRetailerById(foodRetailerId);
+    @GetMapping("/findById/{id}")
+    public Optional<FoodRetailer> findById(@PathVariable Integer id){
+        return foodRetailerService.findById(id);
     }
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id){

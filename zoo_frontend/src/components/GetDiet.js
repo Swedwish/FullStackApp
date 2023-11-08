@@ -4,16 +4,15 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container, Paper, Typography } from '@mui/material';
 
-export default function AddDiet() {
+export default function GetDiet() {
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" };
 
     // State variables to store form data and error status
     const [animalId, setAnimalId] = React.useState("");
     const [foodName, setFoodName] = React.useState("");
-    const [amountKg, setAmountKg] = React.useState("");
     const [animalIdError, setAnimalIdError] = React.useState(false);
     const [foodNameError, setFoodNameError] = React.useState(false);
-    const [resultDiet, setResultDiet] = React.useState(null);
+    const [data, setData] = React.useState(null);
 
     // Event handlers to update state
 
@@ -27,14 +26,10 @@ export default function AddDiet() {
         setFoodNameError(false);
     };
 
-    const handleAmountKgChange = (e) => {
-        setAmountKg(e.target.value);
-    };
-
-    const handleSave = (e) => {
+    const handleGet = (e) => {
         e.preventDefault();
 
-        if (animalId.trim() === "" || foodName.trim() === "") {
+        if (animalId.trim() === "" && foodName.trim() === "") {
             setAnimalIdError(animalId.trim() === "");
             setFoodNameError(foodName.trim() === "");
             return;
@@ -43,20 +38,18 @@ export default function AddDiet() {
         const diet = {
             animalId,
             foodName,
-            amountKg,
         };
 
         console.log(diet);
 
-        fetch(`http://localhost:8080/diet/add`, {
-            method: "POST",
+        fetch(`http://localhost:8080/diet/findById?animalId=${animalId}&foodName=${foodName}`, {
+            method: "GET",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(diet),
         })
-        .then((res) => res.json())
-        .then((result) => {
-            setResultDiet(result);
-        });
+            .then((res) => res.json())
+            .then((result) => {
+                setData(result);
+            });
     };
 
     return (
@@ -68,7 +61,7 @@ export default function AddDiet() {
                     autoComplete="off"
                 >
                     <Typography variant="h5" gutterBottom>
-                        Diet Addition
+                        Get Diet
                     </Typography>
                     <TextField
                         id="outlined-basic"
@@ -78,9 +71,8 @@ export default function AddDiet() {
                         sx={{ mt: 2 }}
                         value={animalId}
                         onChange={handleAnimalIdChange}
-                        required
                         error={animalIdError}
-                        helperText={animalIdError ? "Animal ID is required" : ""}
+                        helperText={animalIdError ? "Animal ID or food name is required" : ""}
                     />
                     <TextField
                         id="outlined-basic"
@@ -90,38 +82,29 @@ export default function AddDiet() {
                         sx={{ mt: 2 }}
                         value={foodName}
                         onChange={handleFoodNameChange}
-                        required
                         error={foodNameError}
-                        helperText={foodNameError ? "Food Name is required" : ""}
-                    />
-                    <TextField
-                        id="outlined-basic"
-                        label="Amount (kg)"
-                        variant="outlined"
-                        fullWidth
-                        sx={{ mt: 2 }}
-                        value={amountKg}
-                        onChange={handleAmountKgChange}
+                        helperText={foodNameError ? "Animal ID or food name is required" : ""}
                     />
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleSave}
+                        onClick={handleGet}
                         sx={{ mt: 2 }}
                     >
-                        Save
+                        Get
                     </Button>
                 </Box>
             </Paper>
 
-            {resultDiet && (
+            {data && (
                 <Paper elevation={3} style={paperStyle}>
-                    <Paper elevation={6} style={{ margin: "10px", padding: "15px", textAlign: "left" }}>
-                        {resultDiet.id ? `ID: ${resultDiet.id} |` : ""}
-                        {resultDiet.animal ? `Animal ID: ${resultDiet.animal.id} |` : ""}
-                        {resultDiet.food ? `Food Name: ${resultDiet.food.name} |` : ""}
-                        {resultDiet.amountKg ? `Amount (kg): ${resultDiet.amountKg} |` : ""}
-                    </Paper>
+                    {data.map((item) =>
+                        <Paper elevation={6} style={{ margin: "10px", padding: "15px", textAlign: "left" }} key={item.id}>
+                            {item.id ? `ID: ${item.id} |` : ""}
+                            {item.animal ? `Animal ID: ${item.animal.id} |` : ""}
+                            {item.food ? `Food Name: ${item.food.name} |` : ""}
+                            {item.amountKg ? `Amount (kg): ${item.amountKg} |` : ""}
+                        </Paper>)}
                 </Paper>
             )}
         </Container>

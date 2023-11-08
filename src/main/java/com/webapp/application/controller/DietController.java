@@ -2,7 +2,6 @@ package com.webapp.application.controller;
 
 import com.webapp.application.model.Diet;
 import com.webapp.application.service.AnimalService;
-import com.webapp.application.service.CellService;
 import com.webapp.application.service.DietService;
 import com.webapp.application.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -24,7 +23,7 @@ public class DietController {
     FoodService foodService;
 
     @PostMapping("/add")
-    public Diet saveDiet(@RequestBody Map<String, Object> data) throws Exception {
+    public Diet save(@RequestBody Map<String, Object> data) throws Exception {
         Diet diet = new Diet();
         diet.setAmountKg(Integer.parseInt((String) data.get("amountKg")));
         diet.setAnimal(animalService.findAnimalById(Integer.parseInt((String)data.get("animalId")))
@@ -34,15 +33,20 @@ public class DietController {
         return dietService.saveDiet(diet);
     }
     @GetMapping("/findAll")
-    public List<Diet> findAllDiets(){
+    public List<Diet> findAll(){
         return dietService.findAllDiets();
     }
 
     @GetMapping("/findById")
-    public Optional<Diet> findById(@RequestBody Integer dietId){
-        return dietService.findDietById(dietId);
+    public List<Diet> findById(@RequestParam(name = "animalId") String animalIdStr,
+                               @RequestParam(name = "foodName") String foodName){
+        Integer animalId = Integer.parseInt(Objects.equals(animalIdStr, "") ? "-1" : animalIdStr);
+        if (animalId != -1) {
+            return dietService.findDietByAnimalId(animalId);
+        } else {
+            return dietService.findDietByFoodName(foodName);
+        }
     }
-
     @DeleteMapping("/delete/{id}")
     public void deleteDietById(@PathVariable Integer id){
         dietService.deleteDietById(id);

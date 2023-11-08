@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FoodRetailerService {
-    public FoodRetailer saveFoodRetailer(FoodRetailer foodRetailer);
-    public List<FoodRetailer> findAllFoodRetailers();
-    public void changePriceById(int id, int newPrice);
-    public Optional<FoodRetailer> findFoodRetailerById(Integer id);
-    public void delete(int id);
+    FoodRetailer save(FoodRetailer foodRetailer);
+    List<FoodRetailer> findAll();
+    FoodRetailer changePriceById(int id, int newPrice);
+    Optional<FoodRetailer> findById(Integer id);
+    void delete(int id);
 
 }

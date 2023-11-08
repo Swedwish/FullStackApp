@@ -4,24 +4,16 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container, Paper } from '@mui/material';
 
-function formatDate(date) {
-    if (!date) {
-        return "";
-    }
 
-    const formattedDate = new Date(date).toLocaleDateString(); // Format as "MM/DD/YYYY"
-    return formattedDate;
-}
-
-export default function MoveAnimal() {
+export default function ChangeTemperature() {
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" };
 
     // State variables to store form data and error status
     const [id, setId] = React.useState("");
-    const [cellNumber, setCellNumber] = React.useState("");
+    const [averageTemperature, setAverageTemperature] = React.useState("");
     const [idError, setIdError] = React.useState(false);
-    const [cellNumberError, setCellNumberError] = React.useState(false);
-    const [resultAnimal, setResultAnimal] = React.useState(null);
+    const [AverageTemperatureError, setAverageTemperatureError] = React.useState(false);
+    const [resultCell, setResultCell] = React.useState(null);
 
     // Event handlers to update state
 
@@ -30,37 +22,41 @@ export default function MoveAnimal() {
         setIdError(false);
     };
 
-    const handleCellNumberChange = (e) => {
-        setCellNumber(e.target.value);
-        setCellNumberError(false);
+    const handleAverageTemperatureChange = (e) => {
+        setAverageTemperature(e.target.value);
+        setAverageTemperatureError(false);
     };
 
     const handleMove = (e) => {
         e.preventDefault();
-
-        if (id.trim() === "" || cellNumber.trim() === "") {
+    
+        if (id.trim() === "" || averageTemperature.trim() === "") {
             setIdError(id.trim() === "");
-            setCellNumberError(cellNumber.trim() === "");
+            setAverageTemperatureError(averageTemperature.trim() === "");
             return;
         }
-        const animal = {
+        const cell = {
             id,
-            cellId: cellNumber
+            averageTemperature,
         };
-
-        console.log(animal);
-
-        fetch(`http://localhost:8080/animal/moveAnimal`, {
+    
+        console.log(cell);
+    
+        fetch(`http://localhost:8080/cell/changeTemperature`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(animal),
+            body: JSON.stringify(cell),
         })
             .then((res) => {
-                res.json();
-                console.log(res);
+                console.log("Response status:", res.status);
+                return res.json();
             })
             .then((result) => {
-                setResultAnimal(result);
+                console.log("Received data:", result);
+                setResultCell(result);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
             });
     };
 
@@ -85,15 +81,15 @@ export default function MoveAnimal() {
                     />
                     <TextField
                         id="outlined-basic"
-                        label="New cell number(id)"
+                        label="New average temperature"
                         variant="outlined"
                         fullWidth
                         sx={{ mt: 2 }}
-                        value={cellNumber}
-                        onChange={handleCellNumberChange}
+                        value={averageTemperature}
+                        onChange={handleAverageTemperatureChange}
                         required
-                        error={cellNumberError}
-                        helperText={cellNumberError ? "Cell Number is required" : ""}
+                        error={AverageTemperatureError}
+                        helperText={AverageTemperatureError ? "Cell Number is required" : ""}
                     />
                     <Button
                         variant="contained"
@@ -106,15 +102,12 @@ export default function MoveAnimal() {
                 </Box>
             </Paper>
 
-            {resultAnimal && (
+            {resultCell && (
                 <Paper elevation={3} style={paperStyle}>
                     <Paper elevation={6} style={{ margin: "10px", padding: "15px", textAlign: "left" }}>
-                        {resultAnimal.id ? `Id: ${resultAnimal.id} |` : ""}
-                        {resultAnimal.name ? `Name: ${resultAnimal.name} |` : ""}
-                        {resultAnimal.species ? `Species: ${resultAnimal.species} |` : ""}
-                        {resultAnimal.dateOfBirth ? `Date of birth: ${formatDate(resultAnimal.dateOfBirth)} |` : ""}
-                        {resultAnimal.gender ? `Gender: ${resultAnimal.gender} |` : ""}
-                        {resultAnimal.cell && resultAnimal.cell.id ? `Cell id: ${resultAnimal.cell.id} |` : ""}
+                        {resultCell.id ? `ID: ${resultCell.id} |` : ""}
+                        {resultCell.sizeM3 ? `Size (m^3): ${resultCell.sizeM3} |` : ""}
+                        {resultCell.averageTemperature ? `Average Temperature: ${resultCell.averageTemperature} |` : ""}
                     </Paper>
                 </Paper>
             )}

@@ -17,20 +17,20 @@ public class CellController
     CellService cellService;
 
     @GetMapping("/findAll")
-    public List<Cell> findAllCells(){
+    public List<Cell> findAll(){
         return cellService.findAllCells();
     }
 
     @PostMapping("/add")
-    public Cell addCell(@RequestBody Cell cell){
+    public Cell add(@RequestBody Cell cell){
         return cellService.saveCell(cell);
     }
 
     @PutMapping("/changeTemperature")
-    public void changeTemperatureById(@RequestBody Map<String,Object> data){
-        int id = (int)data.get("cellId");
-        int temperature = (int)data.get("temperature");
-        cellService.changeTemperatureById(id, temperature);
+    public Cell changeTemperatureById(@RequestBody Map<String,Object> data){
+        Integer id = Integer.parseInt((String) data.get("id"));
+        Integer temperature = Integer.parseInt((String) data.get("averageTemperature"));
+        return cellService.changeTemperatureById(id, temperature);
     }
 
     @DeleteMapping("/delete/{id}")

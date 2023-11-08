@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WorkerService {
-    public Worker saveWorker(Worker worker);
-    public List<Worker> findAllWorkers();
-    public List<Worker> findWorkerByName(String name);
-    public Optional<Worker> findWorkerById(int id);
-    public void changeSalary(int id, int newSalary);
-    public void promote(int id, String newJobTitle);
-    public void fire(int id);
+    Worker saveWorker(Worker worker);
+    List<Worker> findAllWorkers();
+    List<Worker> findWorkerByName(String name);
+    Optional<Worker> findWorkerById(int id);
+    void changeSalary(int id, int newSalary);
+    void promote(int id, String newJobTitle);
+    void fire(int id);
 
 }

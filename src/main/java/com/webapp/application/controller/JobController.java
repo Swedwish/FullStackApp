@@ -1,5 +1,6 @@
 package com.webapp.application.controller;
 
+import com.webapp.application.model.Diet;
 import com.webapp.application.model.Job;
 import com.webapp.application.service.AnimalService;
 import com.webapp.application.service.JobService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -41,19 +43,23 @@ public class JobController {
         return jobService.findAllJobs();
     }
 
-    @GetMapping("/findById")
-    public Optional<Job> findJobById(@RequestBody int jobId){
-        return jobService.findJobById(jobId);
+    @GetMapping("/findById/{id}")
+    public Optional<Job> findById(@PathVariable int id){
+        return jobService.findJobById(id);
     }
 
-    @GetMapping("/findByAnimalId")
-    public List<Job> findByAnimalId(@RequestBody int animalId){
-        return jobService.findByAnimalId(animalId);
-    }
-
-    @GetMapping("/findByWorkerId")
-    public List<Job> findByWorkerId(@RequestBody int workerId){
-        return jobService.findByWorkerId(workerId);
+    @GetMapping("/findByAnimalOrWorkerId")
+    public List<Job> findByAnimalOrWorkerId(@RequestParam(name = "animalId") String animalIdStr,
+                                            @RequestParam(name = "workerId") String workerIdStr){
+        Integer animalId = Integer.parseInt(Objects.equals(animalIdStr, "") ? "-1" : animalIdStr);
+        Integer workerId = Integer.parseInt(Objects.equals(workerIdStr, "") ? "-1" : workerIdStr);
+        if (animalId != -1 && workerId != -1) {
+            return jobService.findByAnimalAndWorkerId(animalId,workerId);
+        } else if (animalId != -1) {
+            return jobService.findByAnimalId(animalId);
+        } else {
+            return jobService.findByWorkerId(workerId);
+        }
     }
 
     @DeleteMapping("/delete/id")

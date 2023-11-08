@@ -17,22 +17,22 @@ public class WorkerController {
     WorkerService workerService;
 
     @PostMapping("/add")
-    public Worker addWorker(@RequestBody Worker worker){
+    public Worker add(@RequestBody Worker worker){
         return workerService.saveWorker(worker);
     }
 
     @GetMapping("/findAll")
-    public List<Worker> findAllWorkers(){
+    public List<Worker> findAll(){
         return workerService.findAllWorkers();
     }
 
     @GetMapping("/findByName/{workerName}")
-    public List<Worker> findWorkerByName(@PathVariable String workerName){
+    public List<Worker> findByName(@PathVariable String workerName){
         return workerService.findWorkerByName(workerName);
     }
 
     @GetMapping("/findById")
-    public  Optional<Worker> findWorkerById(@RequestBody Integer workerId){
+    public  Optional<Worker> findById(@RequestBody Integer workerId){
         return workerService.findWorkerById(workerId);
     }
 

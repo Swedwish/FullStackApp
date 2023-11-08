@@ -19,23 +19,23 @@ public class AnimalController {
     private CellService cellService;
 
     @PostMapping("/add/{cellId}")
-    public Animal addAnimal(@PathVariable int cellId, @RequestBody Animal animal) throws Exception {
+    public Animal add(@PathVariable int cellId, @RequestBody Animal animal) throws Exception {
         return animalService.saveAnimalWithOptionalCell(animal,cellId);
     }
 
     @GetMapping("/findByName/{animalName}")
-    public List<Animal> getAnimalByName(@PathVariable String animalName){
-        return animalService.findAnimalByName(animalName);
+    public List<Animal> getByName(@PathVariable String animalName){
+        return animalService.findByName(animalName);
     }
 
     @GetMapping("/findAll")
-    public List<Animal> getAllAnimal() {
-        return animalService.findAllAnimals();
+    public List<Animal> getAll() {
+        return animalService.findAll();
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteAnimalById (@PathVariable int id){
-        animalService.deleteAnimalById(id);
+    public void deleteById(@PathVariable int id){
+        animalService.deleteById(id);
     }
 
     @PutMapping("/moveAnimal")

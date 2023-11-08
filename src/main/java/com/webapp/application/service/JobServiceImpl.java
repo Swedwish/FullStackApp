@@ -19,6 +19,11 @@ public class JobServiceImpl implements JobService{
     }
 
     @Override
+    public List<Job> findByAnimalAndWorkerId(int animalId, int workerId) {
+        return jobRepository.findByAnimalAndWorkerId(animalId, workerId);
+    }
+
+    @Override
     public List<Job> findAllJobs() {
         return jobRepository.findAll();
     }

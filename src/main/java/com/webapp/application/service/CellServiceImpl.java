@@ -24,7 +24,7 @@ public class CellServiceImpl implements CellService{
     }
 
     @Override
-    public void changeTemperatureById(int id, int temperature) {
+    public Cell changeTemperatureById(int id, int temperature) {
         // Find the cell by ID
         Cell cell = cellRepository.findById(id).orElse(null);
 
@@ -37,6 +37,7 @@ public class CellServiceImpl implements CellService{
         } else {
             throw new RuntimeException("No cell with ID" + id);
         }
+        return cell;
     }
 
     @Override

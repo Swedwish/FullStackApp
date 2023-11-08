@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FoodService {
-    public Food saveFood(Food food);
-    public List<Food> findAllFood();
-    public Optional<Food> findFoodByName(String name);
-    public void deleteFoodByName(String name);
+    Food saveFood(Food food);
+    List<Food> findAllFood();
+    Optional<Food> findFoodByName(String name);
+    void deleteFoodByName(String name);
 }

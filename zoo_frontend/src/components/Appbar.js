@@ -42,7 +42,7 @@ const subMenus = {
   Food: [
     { text: 'Add Food', link: '/addFood' },
     { text: 'Get All Food', link: '/getAll/food' },
-    { text: 'Find Food by Name', link: '/findFoodByName' },
+    { text: 'Get Food by Name', link: '/getFoodByName' },
     { text: 'Delete Food', link: '/delete/food' },
   ],
   FoodRetailer: [
@@ -56,8 +56,7 @@ const subMenus = {
     { text: 'Add Job', link: '/addJob' },
     { text: 'Get All Jobs', link: '/getAll/job' },
     { text: 'Get Job by Id', link: '/getJobById' },
-    { text: 'Get Jobs by Animal Id', link: '/getJobsByAnimalId' },
-    { text: 'Get Jobs by Worker Id', link: '/getJobsByWorkerId' },
+    { text: 'Get Jobs by Animal and/or Worker Id', link: '/getJobByAnimalOrWorkerId' },
     { text: 'Delete Job', link: '/delete/job' },
   ],
   Worker: [

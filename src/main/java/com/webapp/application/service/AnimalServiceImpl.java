@@ -19,7 +19,7 @@ public class AnimalServiceImpl implements AnimalService{
     @Autowired
     private CellRepository cellRepository;
     @Override
-    public Animal saveAnimal(Animal animal) {
+    public Animal save(Animal animal) {
         return animalRepository.save(animal);
     }
 
@@ -27,7 +27,7 @@ public class AnimalServiceImpl implements AnimalService{
     public Animal saveAnimalWithOptionalCell(Animal animal, int cellId) {
         Cell cell = cellRepository.findById(cellId).map(celll -> {
             animal.setCell(celll);
-            saveAnimal(animal);
+            save(animal);
             return celll;
         }).orElse(null);
         if (cell == null){
@@ -35,18 +35,18 @@ public class AnimalServiceImpl implements AnimalService{
             cell.setId(cellId);
             cellRepository.save(cell);
             animal.setCell(cell);
-            saveAnimal(animal);
+            save(animal);
         }
         return animal;
     }
 
     @Override
-    public List<Animal> findAllAnimals() {
+    public List<Animal> findAll() {
         return animalRepository.findAll();
     }
 
     @Override
-    public Animal changeAnimal(Animal animal) {
+    public Animal change(Animal animal) {
         Animal change = animalRepository.getReferenceById(animal.getId());
         change.setCell(animal.getCell());
         change.setGender(animal.getGender());
@@ -85,12 +85,12 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
-    public void deleteAnimalById(int id) {
+    public void deleteById(int id) {
         animalRepository.delete(animalRepository.getReferenceById(id));
     }
 
     @Override
-    public List<Animal> findAnimalByName(String name) {
+    public List<Animal> findByName(String name) {
         List<Animal> ans = animalRepository.findByName(name);
         return ans;
     }

@@ -1,9 +1,6 @@
 package com.webapp.application.service;
 
 import com.webapp.application.model.*;
-import com.webapp.application.repository.CellRepository;
-import com.webapp.application.repository.DietRepository;
-import com.webapp.application.repository.FoodRepository;
 import com.webapp.application.repository.FoodRetailerRepository;
 import org.hibernate.sql.exec.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +15,16 @@ public class FoodRetailerServiceImpl implements FoodRetailerService{
     FoodRetailerRepository foodRetailerRepository;
 
     @Override
-    public FoodRetailer saveFoodRetailer(FoodRetailer foodRetailer) {
+    public FoodRetailer save(FoodRetailer foodRetailer) {
         return foodRetailerRepository.save(foodRetailer);
     }
 
     @Override
-    public List<FoodRetailer> findAllFoodRetailers() {
+    public List<FoodRetailer> findAll() {
         return foodRetailerRepository.findAll();
     }
     @Override
-    public void changePriceById(int id, int newPrice) {
+    public FoodRetailer changePriceById(int id, int newPrice) {
         // Find the food retailer by ID
         FoodRetailer foodRetailer = foodRetailerRepository.findById(id).orElse(null);
 
@@ -40,6 +37,7 @@ public class FoodRetailerServiceImpl implements FoodRetailerService{
         } else {
             throw new RuntimeException("No food retailer with such ID");
         }
+        return foodRetailer;
     }
 
     @Override
@@ -49,7 +47,7 @@ public class FoodRetailerServiceImpl implements FoodRetailerService{
     }
 
     @Override
-    public Optional<FoodRetailer> findFoodRetailerById(Integer id) {
+    public Optional<FoodRetailer> findById(Integer id) {
         return foodRetailerRepository.findById(id);
     }
 }

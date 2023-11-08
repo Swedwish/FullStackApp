@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -17,7 +16,7 @@ public class FoodController {
     FoodService foodService;
 
     @PostMapping("/add")
-    public Food saveFood(@RequestBody Food food){
+    public Food save(@RequestBody Food food){
         return foodService.saveFood(food);
     }
 
