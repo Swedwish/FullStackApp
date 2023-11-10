@@ -48,3 +48,7 @@ The **Reactive Web Application for Managing Zoo Operations** is a comprehensive 
 #### Conclusion:
 
 The **Reactive Web Application for Managing Zoo Operations** offers a scalable and efficient solution for modern zoos to enhance their operational capabilities. The combination of React.js and Spring Boot ensures a powerful and responsive application that meets the diverse needs of zoo administrators, keepers, and human resource managers.
+
+
+P.S. db sceme is in the "other" folder.
+
