@@ -1,10 +1,9 @@
 package com.webapp.application.controller;
 
-import com.webapp.application.model.Diet;
 import com.webapp.application.model.Job;
-import com.webapp.application.service.AnimalService;
-import com.webapp.application.service.JobService;
-import com.webapp.application.service.WorkerService;
+import com.webapp.application.service.interfaces.AnimalService;
+import com.webapp.application.service.interfaces.JobService;
+import com.webapp.application.service.interfaces.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

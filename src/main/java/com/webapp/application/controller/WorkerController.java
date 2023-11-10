@@ -1,7 +1,7 @@
 package com.webapp.application.controller;
 
 import com.webapp.application.model.Worker;
-import com.webapp.application.service.WorkerService;
+import com.webapp.application.service.interfaces.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,24 +26,24 @@ public class WorkerController {
         return workerService.findAllWorkers();
     }
 
-    @GetMapping("/findByName/{workerName}")
-    public List<Worker> findByName(@PathVariable String workerName){
+    @GetMapping("/findByName")
+    public List<Worker> findByName(@RequestParam(name = "name") String workerName){
         return workerService.findWorkerByName(workerName);
     }
 
     @GetMapping("/findById")
-    public  Optional<Worker> findById(@RequestBody Integer workerId){
-        return workerService.findWorkerById(workerId);
+    public  Optional<Worker> findById(@RequestParam(name = "id") Integer id){
+        return workerService.findWorkerById(id);
     }
 
     @PutMapping("/changeSalary")
-    public void changeSalary(@RequestBody Map<String, Object> data){
-        workerService.changeSalary(Integer.parseInt((String)data.get("workerId")), Integer.parseInt((String)data.get("salary")));
+    public Worker changeSalary(@RequestBody Map<String, Object> data){
+        return workerService.changeSalary(Integer.parseInt((String)data.get("id")), Integer.parseInt((String)data.get("salary")));
     }
 
     @PutMapping("/promote")
-    public void promote(@RequestBody Map<String, Object> data){
-        workerService.promote(Integer.parseInt((String)data.get("workerId")), (String) data.get("jobTitle"));
+    public Worker promote(@RequestBody Map<String, Object> data){
+        return workerService.promote(Integer.parseInt((String)data.get("id")), (String) data.get("jobTitle"));
     }
 
     @DeleteMapping("/delete/{id}")

@@ -1,28 +1,31 @@
 import './App.css';
-import HomePage from './pages/HomePage';
-import AnimalAdditionPage from './pages/AnimalAdditionPage';
-import DietAdditionPage from './pages/DietAdditionPage';
-import CellAdditionPage from './pages/CellAdditionPage';
-import FoodAdditionPage from './pages/FoodAdditionPage';
-import FoodRetailerAdditionPage from './pages/FoodRetailerAdditionPage';
-import JobAdditionPage from './pages/JobAdditionPage';
-import WorkerAdditionPage from './pages/WorkerAdditionPage';
-import RemovalPage from './pages/RemovalPage'
-import GetAllPage from './pages/GetAllPage'
-import GetDietPage from './pages/GetDietPage'
+import HomePage from './pages/Common/HomePage';
+import AnimalAdditionPage from './pages/Animal/AnimalAdditionPage';
+import DietAdditionPage from './pages/Diet/DietAdditionPage';
+import CellAdditionPage from './pages/Cell/CellAdditionPage';
+import FoodAdditionPage from './pages/Food/FoodAdditionPage';
+import FoodRetailerAdditionPage from './pages/FoodRetailer/FoodRetailerAdditionPage';
+import JobAdditionPage from './pages/Job/JobAdditionPage';
+import WorkerAdditionPage from './pages/Worker/WorkerAdditionPage';
+import RemovalPage from './pages/Common/RemovalPage'
+import GetAllPage from './pages/Common/GetAllPage'
+import GetDietPage from './pages/Diet/GetDietPage'
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MoveAnimalPage from './pages/MoveAnimalPage';
-import GetAnimalByNamePage from './pages/GetAnimalByNamePage';
-import ChangeCellTemperaturePage from './pages/ChangeCellTemperaturePage';
-import GetFoodByNamePage from './pages/GetFoodByNamePage';
-import GetFoodRetailerByIdPage from './pages/GetFoodRetailerByIdPage';
-import ChangePricePage from './pages/ChangePricePage';
-import GetJobByIdPage from './pages/GetJobById';
-import GetJobByAnimalOrWorkerIdPage from './pages/GetJobByAnimalOrWorkerIdPage';
-
+import MoveAnimalPage from './pages/Animal/MoveAnimalPage';
+import GetAnimalByNamePage from './pages/Animal/GetAnimalByNamePage';
+import ChangeCellTemperaturePage from './pages/Cell/ChangeCellTemperaturePage';
+import GetFoodByNamePage from './pages/Food/GetFoodByNamePage';
+import GetFoodRetailerByIdPage from './pages/FoodRetailer/GetFoodRetailerByIdPage';
+import ChangePricePage from './pages/FoodRetailer/ChangePricePage';
+import GetJobByIdPage from './pages/Job/GetJobById';
+import GetJobByAnimalOrWorkerIdPage from './pages/Job/GetJobByAnimalOrWorkerIdPage';
+import GetWorkerByNamePage from './pages/Worker/GetWorkerByNamePage';
+import GetWorkerByIdPage from './pages/Worker/GetWorkerByIdPage';
+import ChangeSalaryPage from './pages/Worker/ChangeSalaryPage';
+import PromotePage from './pages/Worker/PromotePage';
 function App() {
   return (
     <Router>
@@ -48,6 +51,10 @@ function App() {
             <Route path='/changePrice' element={<ChangePricePage/>}/>
             <Route path='/getJobById' element={<GetJobByIdPage/>}/>
             <Route path='/getJobByAnimalOrWorkerId' element={<GetJobByAnimalOrWorkerIdPage/>}/>
+            <Route path='/promoteWorker' element={<PromotePage/>}/>
+            <Route path='/changeWorkerSalary' element={<ChangeSalaryPage/>}/>
+            <Route path='/getWorkersByName' element={<GetWorkerByNamePage/>}/>
+            <Route path='/getWorkerById' element={<GetWorkerByIdPage/>}/>
           </Routes>
         </div>
       </LocalizationProvider>

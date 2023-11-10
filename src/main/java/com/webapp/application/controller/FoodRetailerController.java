@@ -1,8 +1,8 @@
 package com.webapp.application.controller;
 
 import com.webapp.application.model.FoodRetailer;
-import com.webapp.application.service.FoodRetailerService;
-import com.webapp.application.service.FoodService;
+import com.webapp.application.service.interfaces.FoodRetailerService;
+import com.webapp.application.service.interfaces.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

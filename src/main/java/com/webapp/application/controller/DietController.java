@@ -1,9 +1,9 @@
 package com.webapp.application.controller;
 
 import com.webapp.application.model.Diet;
-import com.webapp.application.service.AnimalService;
-import com.webapp.application.service.DietService;
-import com.webapp.application.service.FoodService;
+import com.webapp.application.service.interfaces.AnimalService;
+import com.webapp.application.service.interfaces.DietService;
+import com.webapp.application.service.interfaces.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

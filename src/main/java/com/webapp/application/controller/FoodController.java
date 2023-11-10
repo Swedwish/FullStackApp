@@ -1,7 +1,7 @@
 package com.webapp.application.controller;
 
 import com.webapp.application.model.Food;
-import com.webapp.application.service.FoodService;
+import com.webapp.application.service.interfaces.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,8 +1,8 @@
 package com.webapp.application.controller;
 
 import com.webapp.application.model.Animal;
-import com.webapp.application.service.AnimalService;
-import com.webapp.application.service.CellService;
+import com.webapp.application.service.interfaces.AnimalService;
+import com.webapp.application.service.interfaces.CellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
